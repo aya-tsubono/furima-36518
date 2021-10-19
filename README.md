@@ -17,7 +17,7 @@
 ### Association
 
 - has_many :items
-- has_many :buying_history
+- has_many :buying_historys
 
 
 ## items テーブル
