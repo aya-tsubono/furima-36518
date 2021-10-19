@@ -17,36 +17,36 @@
 ### Association
 
 - has_many :items
-- has_many :buying_historys
+- has_many :buying_histories
 
 
 ## items テーブル
 
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| title        | string     | null: false                    |
-| text         | text       | null: false                    |
-| category     | string     | null: false                    |
-| condition    | string     | null: false                    |
-| delivery_fee | integer    | null: false                    |
-| area         | string     | null: false                    |
-| days         | string     | null: false                    |
-| price        | integer    | null: false                    |
-| user_id      | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| title           | string     | null: false                    |
+| text            | text       | null: false                    |
+| category_id     | integer    | null: false                    |
+| condition_id    | integer    | null: false                    |
+| delivery_fee_id | integer    | null: false                    |
+| area_id         | integer    | null: false                    |
+| days_id         | integer    | null: false                    |
+| price           | integer    | null: false                    |
+| user            | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
-- belongs_to :buying_history
+- has_one :buying_history
 
 
-## buying_history テーブル
+## buying_histories テーブル
 
-| Column  | Type       | Options                        |
-| ------- | ---------- | ------------------------------ |
-| user_id | references | null: false, foreign_key: true |
-| item_id | references | null: false, foreign_key: true |
+| Column | Type       | Options                        |
+| ------ | ---------- | ------------------------------ |
+| user   | references | null: false, foreign_key: true |
+| item   | references | null: false, foreign_key: true |
 
 
 ### Association
@@ -56,15 +56,17 @@
 - has_one :address
 
 
-## address テーブル
+## addresses テーブル
 
-| Column                | Type       | Options                        |
-| --------------------- | ---------- | ------------------------------ |
-| destination_full_name | string     | null: false                    |
-| postcode              | integer    | null: false                    |
-| address               | string     | null: false                    |
-| phone_number          | bigint     | null: false                    |
-| item_id               | references | null: false, foreign_key: true |
+| Column          | Type       | Options                        |
+| --------------- | ---------- | ------------------------------ |
+| postcode        | string     | null: false                    |
+| prefectures_id  | integer    | null: false                    |
+| municipality    | string     | null: false                    |
+| addresses       | string     | null: false                    |
+| building        | string     |                                |
+| phone_number    | string     | null: false                    |
+| buying_history  | references | null: false, foreign_key: true |
 
 ### Association
 
