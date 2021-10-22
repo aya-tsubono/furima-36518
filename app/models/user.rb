@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   
   validates :nickname, presence: true
-  validates :encrypted_password, format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/}
+  validates :password, format:{with: /(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]/}
   validates :last_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/}
   validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ン一-龥]/}
   validates :last_name_kana, presence: true, format: {with: /\A[ァ-ヶー－]+\z/}
