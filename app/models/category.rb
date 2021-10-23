@@ -14,6 +14,6 @@ class Genre < ActiveHash::Base
   ]
 
   include ActiveHash::Associations
-  has_many :items
+  has_many :category
 
 end
