@@ -3,7 +3,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   validates :title, presence: true
   validates :text,  presence: true
-  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
+  validates :price, presence: true, inclusion: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
   validates :image, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
