@@ -1,12 +1,10 @@
 class Item < ApplicationRecord
-
-  validates :title, presence: true
-  validates :text, presence: true
-  validates :price, presence: true
-  validates :user, presence: true
-
-  belongs_to :user
+  belongs_to :user, optional: true
   has_one_attached :image
+  validates :title, presence: true
+  validates :text,  presence: true
+  validates :price, presence: true, inclusion: { in: 300..9_999_999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
+  validates :image, presence: true
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -15,9 +13,9 @@ class Item < ApplicationRecord
   belongs_to :area
   belongs_to :days
 
-  validates :category_id,  presence: true, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :condition_id, presence: true, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :delivery_id,  presence: true, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :area_id,      presence: true, numericality: { other_than: 1, message: "can't be blank" } 
-  validates :days_id,      presence: true, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :category_id,      presence: true, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :condition_id,     presence: true, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :delivery_fee_id,  presence: true, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :area_id,          presence: true, numericality: { other_than: 1, message: "can't be blank" } 
+  validates :days_id,          presence: true, numericality: { other_than: 1, message: "can't be blank" } 
 end
