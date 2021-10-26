@@ -1,8 +1,8 @@
 class Item < ApplicationRecord
-  belongs_to :user, optional: true
+  belongs_to :user
   has_one_attached :image
-  validates :title, presence: true
-  validates :text,  presence: true
+  validates :title, presence: true, length: { maximum: 40 }   
+  validates :text,  presence: true, length: { maximum: 1000 }   
   validates :price, presence: true, inclusion: { in: 300..9999999 }, format: { with: /\A[0-9]+\z/ }, numericality: true
   validates :image, presence: true
 
