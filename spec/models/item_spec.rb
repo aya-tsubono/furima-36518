@@ -23,27 +23,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it 'categoryが空では登録できない' do
-        @item.category_id = ''
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank")
       end
       it 'conditionが空では登録できない' do
-        @item.condition_id = ''
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank")
       end
       it 'delivery_feeが空では登録できない' do
-        @item.delivery_fee_id = ''
+        @item.delivery_fee_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee can't be blank")
       end
       it 'areaが空では登録できない' do
-        @item.area_id = ''
+        @item.area_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Area can't be blank")
       end
       it 'daysが空では登録できない' do
-        @item.days_id = ''
+        @item.days_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Days can't be blank")
       end
@@ -67,8 +67,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Text is too long (maximum is 1000 characters)")
       end
-      it 'priceは、¥300~¥9,999,999の間でなければ保存できない' do
+      it 'priceは、¥300未満では保存できない' do
         @item.price = "100"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは、¥9,999,999を超えると保存できない' do
+        @item.price = "10000000"
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
