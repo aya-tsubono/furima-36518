@@ -11,4 +11,10 @@ class BuyingHistoryAddress
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :prefectures
   validates :prefectures_id, presence: true, numericality: {other_than: 1, message: "can't be blank"}
+
+  def save
+    buying_history = BuyingHistory.create(item_id: item_id, user_id: user_id)
+    Address.create(postcode: postcode, prefectures: prefectures, municipality: municipality, addresses: addresses, building: building, phone_number: phone_number, buying_history_id: buying_history.id)
+  end
+
 end
