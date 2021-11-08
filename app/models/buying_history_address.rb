@@ -1,6 +1,6 @@
 class BuyingHistoryAddress < ApplicationRecord
   include ActiveModel::Model
-  attr_accessor :postcode, :prefectures, :municipality, :addresses, :building, :phone_number, :buying_history
+  attr_accessor :postcode, :prefectures, :municipality, :addresses, :building, :phone_number, :buying_history, :token
   
     validates :postcode,       presence: true, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, message: "is invalid. Include hyphen(-)"}
     validates :municipality,   presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
