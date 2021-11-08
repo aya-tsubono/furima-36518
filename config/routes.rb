@@ -4,4 +4,5 @@ Rails.application.routes.draw do
   root to: 'items#index' 
 
   resources :items
+  resources :buying_histories, only: [:index, :new, :create]
 end
