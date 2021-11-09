@@ -16,16 +16,16 @@ class BuyingHistoriesController < ApplicationController
     if @buying_history_address.valid?
       pay_item
       @buying_history_address.save
-      redirect_to root_path
+      return redirect_to root_path
     else
-      render :new
+      render 'index'
     end
   end
 
   private
 
   def buying_history_params
-    params.require(:buying_history_address).permit(:postcode, :prefecture, :municipality, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+    params.require(:buying_history_address).permit(:postcode, :prefecture, :municipality, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
   end
 
   def pay_item
