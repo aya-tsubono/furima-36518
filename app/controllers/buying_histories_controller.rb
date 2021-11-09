@@ -25,7 +25,7 @@ class BuyingHistoriesController < ApplicationController
   private
 
   def buying_history_params
-    params.require(:buying_history_address).permit(:postcode, :prefectures, :municipality, :addresses, :building, :phone_number, :item_id).merge(user_id: current_user.id)
+    params.require(:buying_history_address).permit(:postcode, :prefecture, :municipality, :addresses, :building, :phone_number, :item_id).merge(user_id: current_user.id)
   end
 
   def pay_item
