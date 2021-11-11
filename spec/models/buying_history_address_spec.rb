@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe BuyingHistoryAddress, type: :model do
   before do
-    @buying_history_address = FactoryBot.build(:buying_history_address)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    @buying_history_address = FactoryBot.build(:buying_history_address, user_id: @user.id, item_id: @item.id)
+    sleep 0.1
   end
 
   describe '商品購入の保存' do
@@ -52,6 +55,16 @@ RSpec.describe BuyingHistoryAddress, type: :model do
         @buying_history_address.valid?
         expect(@buying_history_address.errors.full_messages).to include('Phone number is invalid')
       end
+      it 'phone_numberは、9桁以下の半角数値では保存できない' do
+        @buying_history_address.phone_number = '090887766'
+        @buying_history_address.valid?
+        expect(@buying_history_address.errors.full_messages).to include('Phone number is invalid')
+      end
+      it 'phone_numberは、12桁以上の半角数値では保存できない' do
+        @buying_history_address.phone_number = '090887766554433'
+        @buying_history_address.valid?
+        expect(@buying_history_address.errors.full_messages).to include('Phone number is invalid')
+      end
       it 'phone_numberは、ハイフンが含まれていると保存できない' do
         @buying_history_address.phone_number = '090-8888-9999'
         @buying_history_address.valid?
@@ -63,12 +76,12 @@ RSpec.describe BuyingHistoryAddress, type: :model do
         expect(@buying_history_address.errors.full_messages).to include("Token can't be blank")
       end
       it 'userが紐付いていないと保存できない' do
-        @buying_history_address.user_id = nil
+        @buying_history_address.user_id = ''
         @buying_history_address.valid?
         expect(@buying_history_address.errors.full_messages).to include("User can't be blank")
       end
       it 'itemが紐付いていないと保存できない' do
-        @buying_history_address.item_id = nil
+        @buying_history_address.item_id = ''
         @buying_history_address.valid?
         expect(@buying_history_address.errors.full_messages).to include("Item can't be blank")
       end
