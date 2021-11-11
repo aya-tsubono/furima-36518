@@ -25,7 +25,7 @@ RSpec.describe BuyingHistoryAddress, type: :model do
       it 'postcodeが半角のハイフンを含んでいないと保存できない' do
         @buying_history_address.postcode = '1234567'
         @buying_history_address.valid?
-        expect(@buying_history_address.errors.full_messages).to include("Postcode is invalid. Include hyphen(-)")
+        expect(@buying_history_address.errors.full_messages).to include('Postcode is invalid. Include hyphen(-)')
       end
       it 'areaが空では保存できない' do
         @buying_history_address.area_id = 1
@@ -48,14 +48,14 @@ RSpec.describe BuyingHistoryAddress, type: :model do
         expect(@buying_history_address.errors.full_messages).to include("Phone number can't be blank")
       end
       it 'phone_numberは、10桁以上11桁以内の半角数値でないと保存できない' do
-      @buying_history_address.phone_number = '0908877'
-      @buying_history_address.valid?
-      expect(@buying_history_address.errors.full_messages).to include("Phone number is invalid")
+        @buying_history_address.phone_number = '0908877'
+        @buying_history_address.valid?
+        expect(@buying_history_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'phone_numberは、ハイフンが含まれていると保存できない' do
-      @buying_history_address.phone_number = '090-8888-9999'
-      @buying_history_address.valid?
-      expect(@buying_history_address.errors.full_messages).to include("Phone number is invalid")
+        @buying_history_address.phone_number = '090-8888-9999'
+        @buying_history_address.valid?
+        expect(@buying_history_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'tokenが空では保存できない' do
         @buying_history_address.token = nil

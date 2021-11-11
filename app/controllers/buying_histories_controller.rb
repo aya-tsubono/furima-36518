@@ -29,16 +29,17 @@ class BuyingHistoriesController < ApplicationController
   end
 
   def buying_history_params
-    params.require(:buying_history_address).permit(:postcode, :area_id, :municipality, :addresses, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+    params.require(:buying_history_address).permit(:postcode, :area_id, :municipality, :addresses, :building, :phone_number).merge(
+      user_id: current_user.id, item_id: params[:item_id], token: params[:token]
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
-      Payjp::Charge.create(
-        amount: @item.price, 
-        card: buying_history_params[:token], 
-        currency: 'jpy'
-      )
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: buying_history_params[:token],
+      currency: 'jpy'
+    )
   end
-
 end
