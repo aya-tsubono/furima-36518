@@ -6,7 +6,7 @@ class BuyingHistoryAddress
     validates :area_id, presence: true, numericality: { other_than: 1, message: "can't be blank" }
     validates :municipality, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]/ }
     validates :addresses,    presence: true
-    validates :phone_number, presence: true
+    validates :phone_number, presence: true, format: { with: /\A[0-9]{10,11}/ }
     validates :user_id,      presence: true
     validates :item_id,      presence: true
     validates :token,        presence: true
